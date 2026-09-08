@@ -255,6 +255,7 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
   >([]);
   const [clinicName, setClinicName] = useState("");
   const questionTitle = useRef<HTMLHeadingElement>(null);
+  const formTrigger = useRef<HTMLElement | null>(null);
   const questionBody = useRef<HTMLDivElement>(null);
   const [budget, setBudget] = useState<Budget | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -371,7 +372,8 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
     if (!nextOpen && step === 6) reset();
   }
 
-  const openForm = useCallback(() => {
+  const openForm = useCallback((trigger: HTMLElement) => {
+    formTrigger.current = trigger;
     if (step === 6) reset();
     setOpen(true);
     captureAnalyticsEvent("lead_form_opened");
@@ -381,10 +383,11 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
     function handleStaticTrigger(event: MouseEvent) {
       const target = event.target;
       if (!(target instanceof Element)) return;
-      if (!target.closest('[data-lead-form-trigger="primary"]')) return;
+      const trigger = target.closest<HTMLElement>('[data-lead-form-trigger]');
+      if (!trigger) return;
 
       event.preventDefault();
-      openForm();
+      openForm(trigger);
     }
 
     document.addEventListener("click", handleStaticTrigger);
@@ -514,13 +517,13 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
     <>
       <button
         type="button"
-        onClick={openForm}
+        onClick={(event) => openForm(event.currentTarget)}
         data-cta="lead-form"
         data-cta-label={ctaLabel}
         aria-hidden={isPrimaryCtaVisible || open}
         tabIndex={isPrimaryCtaVisible || open ? -1 : 0}
         className={cn(
-          "fixed inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 inline-flex min-h-14 items-center justify-center rounded-2xl bg-primary px-5 py-3.5 font-semibold text-primary-foreground shadow-[0_16px_45px_-12px_rgba(15,89,82,0.75)] transition-all duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:hidden",
+          "cl-mobile-cta fixed inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 inline-flex min-h-14 items-center justify-center rounded-2xl bg-primary px-5 py-3.5 font-semibold text-primary-foreground shadow-[0_16px_45px_-12px_rgba(15,89,82,0.75)] transition-all duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:hidden",
           isPrimaryCtaVisible || open
             ? "pointer-events-none translate-y-4 opacity-0"
             : "translate-y-0 opacity-100",
@@ -531,6 +534,10 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
 
       <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogContent
+          onCloseAutoFocus={(event) => {
+            event.preventDefault();
+            formTrigger.current?.focus({ preventScroll: true });
+          }}
           onOpenAutoFocus={(event) => {
             if (window.matchMedia("(max-width: 639px)").matches) {
               event.preventDefault();
@@ -545,7 +552,7 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
                 }
               : undefined
           }
-          className="left-0 top-0 flex h-[100dvh] max-h-[100dvh] w-full min-w-0 max-w-none translate-x-0 translate-y-0 flex-col gap-0 overflow-hidden rounded-none border-0 bg-[#fdfcf8] p-0 shadow-2xl sm:left-[50%] sm:top-[50%] sm:h-[640px] sm:max-h-[calc(100dvh-2rem)] sm:max-w-[480px] sm:translate-x-[-50%] sm:translate-y-[-50%] sm:rounded-2xl"
+          className="cl-lead-dialog left-0 top-0 flex h-[100dvh] max-h-[100dvh] w-full min-w-0 max-w-none translate-x-0 translate-y-0 flex-col gap-0 overflow-hidden rounded-none border-0 bg-[#fdfcf8] p-0 shadow-2xl sm:left-[50%] sm:top-[50%] sm:h-[640px] sm:max-h-[calc(100dvh-2rem)] sm:max-w-[480px] sm:translate-x-[-50%] sm:translate-y-[-50%] sm:rounded-2xl"
         >
           {step <= QUESTION_COUNT ? (
             <form

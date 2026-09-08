@@ -31,7 +31,7 @@ export const DEFAULT_COPY: AdCopy = {
   title:
     'Aumenta la facturación de tu Clínica Dental *hasta un 60%* con una _Recepcionista IA_',
   subtitle:
-    'Atiende tu WhatsApp 24/7, agenda citas sola y llega con tu clínica completa. Lista en *7 días*.',
+    'Atiende tu WhatsApp 24/7, agenda citas sola y llega con tu clínica completa.',
   cta: 'Agendar demostración gratis',
 };
 

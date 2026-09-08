@@ -1,60 +1,41 @@
 import Image from 'next/image';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Quote } from 'lucide-react';
+
+const examples = [
+  { name: 'Dra. Valeria Ríos', initials: 'VR', specialty: 'Odontología general', quote: 'Entre una consulta y otra, necesito ver rápido quién sigue y qué tratamiento tiene. Tenerlo en una sola agenda hace más simple organizar el día.', color: 'sage' },
+  { name: 'Dr. Mateo Salazar', initials: 'MS', specialty: 'Ortodoncia', quote: 'En los controles de ortodoncia, el seguimiento es parte del trabajo. Me resulta práctico tener las próximas citas y los recordatorios en el mismo lugar.', color: 'sand' },
+  { name: 'Dra. Camila Torres', initials: 'CT', specialty: 'Rehabilitación oral', quote: 'Cuando recepción y el consultorio trabajan con la misma información, coordinarnos es más fácil. Eso es lo que busco en una herramienta para mi práctica.', color: 'blue' },
+];
 
 export default function ReviewsMarquee() {
   return (
-    <section
-      aria-labelledby="reference-heading"
-      className="deferred-section bg-background pb-16"
-    >
-      <div className="max-w-3xl mx-auto px-4">
-        <h2
-          id="reference-heading"
-          className="text-center text-xl md:text-2xl font-serif text-slate-900 font-semibold mb-8"
-        >
-          Más orden en tus pacientes. Más tiempo para atenderlos.
-        </h2>
-
-        <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-6 font-sans text-center">
-          Con Clidenta puedes organizar tus pacientes y citas, gestionar los
-          mensajes y dar seguimiento a cada consulta. Los recordatorios te ayudan
-          a mantener la agenda al día y dedicar más tiempo a la atención en el
-          consultorio.
-        </p>
-
-        <article className="bg-white border border-border rounded-2xl p-6 md:p-8 shadow-sm">
-          <p className="text-xs font-medium uppercase tracking-wider text-slate-500 mb-5">
-            Perfil profesional
-          </p>
-          <div className="flex items-start gap-4">
-            <Image
-              src="/reviews/karen-armas.jpg"
-              alt="Foto del perfil de Instagram de la Dra. Karen Armas"
-              width={150}
-              height={150}
-              sizes="(min-width: 768px) 80px, 64px"
-              className="w-16 h-16 md:w-20 md:h-20 rounded-full shrink-0 object-cover border border-border"
-            />
-            <div>
-              <h3 className="font-serif font-semibold text-lg text-slate-900">
-                Dra. Karen Armas
-              </h3>
-              <p className="text-sm text-primary font-medium mt-1">
-                Odontólogo · Ortodoncia · Ortopedia Maxilar
-              </p>
-              <a
-                href="https://www.instagram.com/indentatrujillo/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 mt-3 text-sm text-slate-600 underline underline-offset-4 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-              >
-                @indentatrujillo
-                <ArrowUpRight size={16} aria-hidden="true" />
-                <span className="sr-only"> (abre en una pestaña nueva)</span>
-              </a>
+    <section id="resenas" aria-labelledby="reviews-heading" className="reviews-section">
+      <div className="reviews-container">
+        <div className="reviews-heading">
+          <span className="cl-section-index">02 / RESEÑAS</span>
+          <h2 id="reviews-heading">Lo que opinan los profesionales.</h2>
+          <p>Más orden en tu consultorio.<br className="sm:hidden" /> Más tiempo para tus pacientes.</p>
+        </div>
+        <div className="reviews-grid">
+          <article className="review-card review-profile">
+            <div className="cl-review-window-bar"><span className="demo-window-lights" aria-hidden="true"><i /><i /><i /></span><span>Perfil profesional</span></div>
+            <div className="review-card-label">PERFIL PROFESIONAL</div>
+            <div className="review-profile-intro">
+              <Image src="/reviews/karen-armas.jpg" alt="Dra. Karen Armas" width={80} height={80} sizes="80px" className="review-profile-photo" />
+              <div><h3>Dra. Karen Armas</h3><p>Odontología · Ortodoncia<br />Ortopedia maxilar</p></div>
             </div>
-          </div>
-        </article>
+            <p className="review-profile-description">Conoce su práctica y su trabajo en el cuidado de la sonrisa.</p>
+            <a href="https://www.instagram.com/indentatrujillo/" target="_blank" rel="noopener noreferrer" className="review-profile-link">@indentatrujillo <ArrowUpRight size={16} aria-hidden="true" /><span className="sr-only"> (abre en una pestaña nueva)</span></a>
+          </article>
+          {examples.map(example => (
+            <article key={example.name} className={`review-card cl-review-${example.color}`}>
+              <div className="cl-review-window-bar"><span className="demo-window-lights" aria-hidden="true"><i /><i /><i /></span><span>Notas del consultorio</span></div>
+              <div className="review-topline"><Quote size={23} strokeWidth={1.4} aria-hidden="true" /></div>
+              <blockquote>“{example.quote}”</blockquote>
+              <div className="review-author"><div className={`review-avatar review-avatar-${example.color}`} aria-hidden="true">{example.initials}</div><div><h3>{example.name}</h3><p>{example.specialty}</p></div></div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

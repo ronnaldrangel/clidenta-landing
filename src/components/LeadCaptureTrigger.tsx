@@ -10,16 +10,16 @@ const FALLBACK_MESSAGE = encodeURIComponent(
  * conserva una salida funcional hacia WhatsApp; LeadCapture intercepta el
  * clic cuando está hidratado y abre el formulario sin abandonar la página.
  */
-export default function LeadCaptureTrigger({ label }: { label: string }) {
+export default function LeadCaptureTrigger({ label, variant = "primary" }: { label: string; variant?: "primary" | "compact" | "secondary" }) {
   return (
     <a
       href={`https://wa.me/${FALLBACK_WHATSAPP}?text=${FALLBACK_MESSAGE}`}
       target="_blank"
       rel="noopener noreferrer"
-      data-lead-form-trigger="primary"
+      data-lead-form-trigger={variant === "primary" ? "primary" : "secondary"}
       data-cta="lead-form"
       data-cta-label={label}
-      className="inline-flex w-full items-center justify-center gap-3 rounded-xl bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground shadow-[0_10px_30px_-12px_hsl(var(--primary)/0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_16px_35px_-14px_hsl(var(--primary)/0.7)] active:translate-y-0 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:w-auto sm:px-10"
+      className={`cl-button cl-button-aqua ${variant === "compact" ? "cl-button-compact" : ""}`}
     >
       {label}
       <ArrowRight aria-hidden="true" size={19} />
