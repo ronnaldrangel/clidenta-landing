@@ -20,6 +20,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://clidenta.net'),
   title: 'El Mejor Recepcionista AI para Clínicas | Clidenta',
   description:
     'Descubre Clidenta: recepcionista IA + software integral para clínicas odontológicas en Perú y LATAM. Agenda, odontograma digital, historias clínicas, recordatorios y atención por WhatsApp 24/7.',
@@ -42,19 +43,19 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: 'https://clidenta.com/',
+    canonical: 'https://clidenta.net/',
   },
   openGraph: {
     title: 'El Mejor Recepcionista AI para Clínicas | Clidenta',
     description:
       'Automatiza la atención de tus pacientes con la IA más avanzada. Agenda citas y responde consultas 24/7 por WhatsApp.',
-    url: 'https://clidenta.com/',
+    url: 'https://clidenta.net/',
     siteName: 'Clidenta',
     images: [
       {
-        url: 'https://clidenta.com/og-image.jpg',
-        width: 1200,
-        height: 630,
+        url: 'https://clidenta.net/logo/logo_black.png',
+        width: 800,
+        height: 182,
         alt: 'Clidenta Recepcionista AI',
       },
     ],
@@ -66,7 +67,7 @@ export const metadata: Metadata = {
     title: 'El Mejor Recepcionista AI para Clínicas | Clidenta',
     description:
       'Automatiza la atención de tus pacientes con la IA más avanzada. Agenda citas y responde consultas 24/7 por WhatsApp.',
-    images: ['https://clidenta.com/og-image.jpg'],
+    images: ['https://clidenta.net/logo/logo_black.png'],
   },
 };
 
