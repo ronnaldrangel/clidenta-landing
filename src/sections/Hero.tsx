@@ -15,7 +15,7 @@ export default function Hero({ copy = DEFAULT_COPY }: { copy?: AdCopy }) {
           <span className="cl-sparkle"><Sparkles size={34} strokeWidth={1.2} /></span>
         </div>
         <div className="cl-hero-copy">
-          <div className="cl-eyebrow"><span className="cl-eyebrow-icon"><Sparkles size={13} aria-hidden="true" /></span>{copy.eyebrow} del Perú <span aria-hidden="true">🇵🇪</span></div>
+          <div className="cl-eyebrow">{copy.eyebrow} del Perú <span aria-hidden="true">🇵🇪</span></div>
           <h1>{renderCopy(copy.title)}</h1>
           <p className="cl-hero-description">{renderCopy(copy.subtitle, 'cl-copy-highlight')}</p>
           <div className="cl-hero-actions"><LeadCaptureTrigger label={copy.cta} /><a href="#demo" className="cl-button cl-button-silver"><MousePointer2 size={17} aria-hidden="true" /> Probar Clidenta</a></div>
