@@ -53,9 +53,9 @@ export const metadata: Metadata = {
     siteName: 'Clidenta',
     images: [
       {
-        url: 'https://clidenta.net/logo/logo_black.png',
-        width: 800,
-        height: 182,
+        url: 'https://clidenta.net/images/clidenta-share-preview.jpg',
+        width: 1920,
+        height: 1440,
         alt: 'Clidenta Recepcionista AI',
       },
     ],
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     title: 'El Mejor Recepcionista AI para Clínicas | Clidenta',
     description:
       'Automatiza la atención de tus pacientes con la IA más avanzada. Agenda citas y responde consultas 24/7 por WhatsApp.',
-    images: ['https://clidenta.net/logo/logo_black.png'],
+    images: ['https://clidenta.net/images/clidenta-share-preview.jpg'],
   },
 };
 
