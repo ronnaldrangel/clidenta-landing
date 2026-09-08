@@ -119,7 +119,6 @@ export default function HeroLivePreview() {
         </div>
         <div className="demo-status" role="status"><MousePointer2 size={14} aria-hidden="true" /><span>{notice}</span></div>
       </div>
-      <p className="demo-disclaimer">Explora con datos ficticios. Los cambios solo duran durante esta visita.</p>
 
       <Dialog open={selectedId !== null || creating} onOpenChange={open => { if (!open) { setSelectedId(null); setCreating(false); } }}>
         <DialogContent className="demo-dialog" showCloseButton={false} onCloseAutoFocus={event => { event.preventDefault(); trigger.current?.focus(); }}>
